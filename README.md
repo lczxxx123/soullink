@@ -1,7 +1,10 @@
 # 💫 灵犀 · 霊犀 · SoulLink 💫 🤖
-<p align="center">
-<img src="https://images.unsplash.com/photo-1680030062888-e691d5992056?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" alt="logo" width="200"/>
-</p>
+
+<div style="width: 300px; height: 200px; overflow: hidden; text-align: center;">
+  <p style="display: inline-block; vertical-align: middle; line-height: 200px;">
+    <img src="https://images.unsplash.com/photo-1488229297570-58520851e868?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80" width="500" height="100">
+  </p>
+</div>
 
 **灵犀 · 霊犀 · SoulLink** 是一家基于 **GPT 生成技术** 和 **机器人技术** 的公司，致力于为用户提供高质量的智能对话服务。
 
@@ -26,6 +29,8 @@
 ## 联系我们
 
 如果你对 **灵犀 · 霊犀 · SoulLink** 感兴趣，欢迎访问我们的[官网](https://github.com/lczxxx123/soullink)或者扫描下方二维码体验我们的聊天机器人。我们期待与你成为朋友！😄
-<p align="center">
-<img src="https://images.unsplash.com/photo-1680016791527-ec010edad4ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" alt="logo" width="200"/>
-</p>
+<div style="width: 300px; height: 200px; overflow: hidden; text-align: center;">
+  <p style="display: inline-block; vertical-align: middle; line-height: 200px;">
+    <img src="https://images.unsplash.com/photo-1556388158-158ea5ccacbd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" width="500" >
+  </p>
+</div>
