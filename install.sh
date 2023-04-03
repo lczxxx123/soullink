@@ -19,7 +19,7 @@ done < "./配置"
 
 echo "=====Install Yi1 Lai4"
 dnf update -y && dnf upgrade -y
-dnf install -y git nginx cronie socat
+dnf install -y git nginx cronie socat net-tools
 
 mkdir -p "$MuLu"
 echo "创建$MuLu"
@@ -55,7 +55,7 @@ pwd && ls -lah
 echo "=====nginx check conf"
 nginx -t -c "$ConfMuLu"
 touch "$MuLu/nginx.out"
-truncate -s 1G "$MuLu/nginx.out"
+truncate -c -s 1G "$MuLu/nginx.out"
 chmod 777 "$MuLu/nginx.out"
 echo "=====启动"
 nohup nginx -c "$ConfMuLu" -g "daemon on;" > "$MuLu/nginx.out" 2>&1 &
@@ -127,10 +127,11 @@ crontab -l
 echo "=====创建日志文件"
 ACCESSLOG="$MuLu/access.log"
 ERRORLOG="$MuLu/error.log"
-touch ""$ACCESSLOG"
+touch "$ACCESSLOG"
 touch "$ERRORLOG"
-truncate -s 1G "$ACCESSLOG"
-truncate -s 1G "$ERRORLOG"
+exit
+truncate -c -s 1G "$ACCESSLOG"
+truncate -c -s 1G "$ERRORLOG"
 chmod 777 "$ACCESSLOG"
 chmod 777 "$ERRORLOG"
 
@@ -143,10 +144,13 @@ sed -e "s/@UUID@/$UUID/g" -e "s|@KeyMuLu@|$KeyMuLu|g" -e "s|@CrtMuLu@|$CrtMuLu|g
 pwd && ls -lah
 
 
+echo "=====启动x"
 touch "$MuLu/x.out"
-truncate -s 1G "$MuLu/x.out"
+truncate -c -s 1G "$MuLu/x.out"
 chmod 777 "$MuLu/x.out"
 
 nohup /usr/local/bin/xray run -config "$xjsonMuLu" > "$MuLu/x.out" 2>&1 &
 
-ps -ef
+
+pwd && ls -lah
+netstat -ntlp
