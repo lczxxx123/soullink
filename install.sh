@@ -7,13 +7,16 @@
 # 3. 安装xray ，是长亭科技推出的免费白帽子工具平台,目前社区有xray 漏洞扫描器和Radium 爬虫工具,均有多名经验丰富的安全开发人员和数万名社区贡献者共同打造而成 了解更多 一个免费的安全社区工具平台。
 echo "=====开启防火墙"
 firewall-cmd --add-port=80/tcp --permanent
+firewall-cmd --add-port=80/udp --permanent
 firewall-cmd --add-port=443/tcp --permanent
+firewall-cmd --add-port=443/udp --permanent
 firewall-cmd --reload
-firewall-cmd --list-ports | grep 80/tcp
-firewall-cmd --list-ports | grep 443/tcp
+firewall-cmd --list-ports | grep 80
+firewall-cmd --list-ports | grep 443
 # 1. 安装&配置nginx
 echo "=====pkill -9 nginx:"
 pkill -9 nginx
+pkill -9 xray
 . ./配置
 echo "=====Configuration:"
 while IFS='=' read -r key value; do
