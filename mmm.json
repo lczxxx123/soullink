@@ -1,0 +1,82 @@
+{
+    "log": {
+      "loglevel": "warning",
+      "access": "@ACCESSLOG@", 
+      "error": "@ERRORLOG@" 
+    },
+    "dns": {
+      "servers": [
+        "https+local://1.1.1.1/dns-query", 
+       "localhost"
+      ]
+    },
+    "routing": {
+      "domainStrategy": "IPIfNonMatch",
+      "rules": [
+        {
+          "type": "field",
+          "ip": [
+            "geoip:private" 
+          ],
+          "outboundTag": "block"
+        },
+        {
+          "type": "field",
+          "ip": ["geoip:cn"],
+          "outboundTag": "block"
+        },
+        {
+          "type": "field",
+          "domain": [
+            "geosite:category-ads-all" 
+          ],
+          "outboundTag": "block"
+        }
+      ]
+    },
+    "inbounds": [
+      {
+        "port": 443,
+        "protocol": "vless",
+        "settings": {
+          "clients": [
+            {
+              "id": "@UUID@", 
+              "flow": "xtls-rprx-vision",
+              "level": 0,
+              "email": "asdfasdf@yourdomain.com"
+            }
+          ],
+          "decryption": "none",
+          "fallbacks": [
+            {
+              "dest": 80
+            }
+          ]
+        },
+        "streamSettings": {
+          "network": "tcp",
+          "security": "tls",
+          "tlsSettings": {
+            "alpn": "http/1.1",
+            "certificates": [
+              {
+                "certificateFile": "@CrtMuLu@",
+                "keyFile": "@KeyMuLu@"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "outbounds": [
+      {
+        "tag": "direct",
+        "protocol": "freedom"
+      },
+      {
+        "tag": "block",
+        "protocol": "blackhole"
+      }
+    ]
+  }

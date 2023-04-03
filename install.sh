@@ -39,7 +39,7 @@ if [ ! -d "soullink" ]; then
 else
     cd soullink
     echo "=====soulink 要 pull"
-    git pull
+    #git pull
     echo "有了git pull!"
     cd "$MuLu"
 fi
@@ -51,7 +51,7 @@ echo "=====网页放在$RootMuLu,nginx.conf放在$ConfMuLu,soullink放在$Soulli
 pwd && ls -lah
 \cp -r -f "soullink/$WangZhan/"* www/webpage
 echo "$YuMing , $RootMuLu"
-sed -e "s/@YUMING@/$YuMing/g" -e "s|@ROOTMULU@|$RootMuLu|g" "$SoullinkMuLu/nnn.conf" > $ConfMuLu
+sed -e "s/@YUMING@/$YuMing/g" -e "s|@ROOTMULU@|$RootMuLu|g" "$SoullinkMuLu/nnn.conf" > "$ConfMuLu"
 pwd && ls -lah
 echo "=====nginx check conf"
 nginx -t -c "$ConfMuLu"
@@ -68,6 +68,7 @@ curl localhost:80 | head -n 6
 # 2. 安装配置证书
 echo "=====下载执行ACME"
 # 如果失败了soullink底下有备份
+. ~/.bashrc
 if ! command -v acme.sh &> /dev/null
 then
     echo "=====acme.sh 未安装，将尝试自动下载安装"
@@ -101,18 +102,26 @@ acme.sh --installcert -d "$YuMing" --cert-file "$CrtMuLu" --key-file "$KeyMuLu" 
 echo "=====安全社区工具平台"
 cd "$MuLu"
 pwd && ls -lah
-curl -Lo install-release.sh https://github.com/XTLS/Xray-install/raw/main/install-release.sh
-bash install-release.sh 
+if ! command -v xray &> /dev/null
+then
+    echo "=====xray 未安装，将尝试自动下载安装"
+    curl -Lo install-release.sh https://github.com/XTLS/Xray-install/raw/main/install-release.sh
+    bash install-release.sh 
+else
+    echo "=====xray 已经安装"
+fi
+
 chmod +r "$KeyMuLu"
 
-echo "=====配置cert自动更新"
 RenewMuLu="$MuLu/renew.sh"
-sed -e "s/@YUMING@/$YuMing/g" -e "s|@KeyMuLu@|$KeyMuLu|g" -e "s|@fcMuLu@|$fcMuLu|g" "$SoullinkMuLu/xray-cert-renew.sh.muban" > $RenewMuLu
-chmod +x "$RenewMulu"
+echo "=====配置cert自动更新 : $RenewMuLu"
+sed -e "s/@YUMING@/$YuMing/g" -e "s|@KeyMuLu@|$KeyMuLu|g" -e "s|@fcMuLu@|$fcMuLu|g" "$SoullinkMuLu/xray-cert-renew.sh.muban" > "$RenewMuLu"
+chmod +x "$RenewMuLu"
+
 #!/bin/bash
 
 # 添加renew任务到crontab
-(crontab -l ; echo "0 1 1 * * $RenewMulu") | crontab -
+(crontab -l ; echo "0 1 1 * * $RenewMuLu") | crontab -
 crontab -l
 
 echo "=====创建日志文件"
@@ -123,5 +132,11 @@ truncate -s 1G "$ERRORLOG"
 
 touch "$ACCESSLOG" && touch "$ERRORLOG" && chmod a+w "$ACCESSLOG" && chmod a+w "$ERRORLOG"
 pwd && ls -lah
+
+echo "=====创建json配置"
+xjsonMuLu="$MuLu/x.json"
+sed -e "s/@UUID@/$UUID/g" -e "s|@KeyMuLu@|$KeyMuLu|g" -e "s|@CrtMuLu@|$CrtMuLu|g"  -e "s|@ACCESSLOG@|$ACCESSLOG|g"  -e "s|@ERRORLOG@|$ERRORLOG|g" "$SoullinkMuLu/mmm.json" > "$xjsonMuLu"
+pwd && ls -lah
+
 
 cd /fa
