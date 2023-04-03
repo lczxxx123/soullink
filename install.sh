@@ -37,7 +37,7 @@ if [ ! -d "soullink" ]; then
 else
     cd soullink
     echo "=====soulink 要 pull"
-    #git pull
+    git pull
     echo "有了git pull!"
     cd "$MuLu"
 fi
@@ -49,9 +49,9 @@ echo "=====网页放在$RootMuLu,nginx.conf放在$ConfMuLu,soullink放在$Soulli
 pwd && ls -lah
 \cp -r -f "soullink/$WangZhan/"* www/webpage
 echo "$YuMing , $RootMuLu"
-sed -e "s/\$YUMING/$YuMing/g" -e "s/\$ROOTMULU/$RootMuLu/g" "$SoullinkMuLu/nnn.conf" > $ConfMuLu
+sed -e "s/@YUMING@/$YuMing/g" -e "s/@ROOTMULU@/$RootMuLu/g" "$SoullinkMuLu/nnn.conf" > $ConfMuLu
 
-sed -e "s/\$YUMING/$YuMing/g" -e "s/\$ROOTMULU/$RootMuLu/g" "$SoullinkMuLu/nnn.conf"
+
 echo "$SoullinkMuLu/nnn.conf"
 exit
 
