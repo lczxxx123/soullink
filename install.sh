@@ -129,7 +129,7 @@ ACCESSLOG="$MuLu/access.log"
 ERRORLOG="$MuLu/error.log"
 touch "$ACCESSLOG"
 touch "$ERRORLOG"
-exit
+
 truncate -c -s 1G "$ACCESSLOG"
 truncate -c -s 1G "$ERRORLOG"
 chmod 777 "$ACCESSLOG"
