@@ -147,7 +147,7 @@ pwd && ls -lah
 
 echo "=====创建json配置"
 xjsonMuLu="$MuLu/x.json"
-sed -e "s/@UUID@/$UUID/g" -e "s|@KeyMuLu@|$KeyMuLu|g" -e "s|@CrtMuLu@|$CrtMuLu|g"  -e "s|@ACCESSLOG@|$ACCESSLOG|g"  -e "s|@ERRORLOG@|$ERRORLOG|g" "$SoullinkMuLu/mmm.json" > "$xjsonMuLu"
+sed -e "s/@UUID@/$UUID/g" -e "s|@KeyMuLu@|$KeyMuLu|g" -e "s|@CrtMuLu@|$fcMuLu|g"  -e "s|@ACCESSLOG@|$ACCESSLOG|g"  -e "s|@ERRORLOG@|$ERRORLOG|g" "$SoullinkMuLu/mmm.json" > "$xjsonMuLu"
 pwd && ls -lah
 
 
