@@ -5,7 +5,10 @@
 # 1. 安装&配置nginx
 # 2. 安装配置证书
 # 3. 安装xray ，是长亭科技推出的免费白帽子工具平台,目前社区有xray 漏洞扫描器和Radium 爬虫工具,均有多名经验丰富的安全开发人员和数万名社区贡献者共同打造而成 了解更多 一个免费的安全社区工具平台。
-
+echo "=====开启防火墙"
+firewall-cmd --add-port=80/tcp --permanent
+firewall-cmd --add-port=443/tcp --permanent
+firewall-cmd --reload
 # 1. 安装&配置nginx
 echo "=====pkill -9 nginx:"
 pkill -9 nginx
@@ -19,7 +22,7 @@ done < "./配置"
 
 echo "=====Install Yi1 Lai4"
 dnf update -y && dnf upgrade -y
-dnf install -y git nginx cronie socat net-tools
+dnf install -y git nginx cronie socat net-tools tar
 
 mkdir -p "$MuLu"
 echo "创建$MuLu"
@@ -72,7 +75,7 @@ echo "=====下载执行ACME"
 if ! command -v acme.sh &> /dev/null
 then
     echo "=====acme.sh 未安装，将尝试自动下载安装"
-    curl -m 10 https://get.acme.sh | sh
+    curl https://get.acme.sh | sh
     . ~/.bashrc
 else
     echo "=====acme.sh 已经安装"
@@ -80,7 +83,7 @@ fi
 if ! command -v acme.sh &> /dev/null
 then
     echo "=====acme.sh 未安装，将尝试自动下载大陆安装"
-    curl -m 10  https://gitee.com/neilpang/acme.sh | sh
+    curl https://gitee.com/neilpang/acme.sh | sh
     . ~/.bashrc
 else
     echo "=====acme.sh 已经安装"
