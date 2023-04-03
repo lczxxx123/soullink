@@ -154,3 +154,4 @@ nohup /usr/local/bin/xray run -config "$xjsonMuLu" > "$MuLu/x.out" 2>&1 &
 
 pwd && ls -lah
 netstat -ntlp
+cat "$MuLu/x.out"
