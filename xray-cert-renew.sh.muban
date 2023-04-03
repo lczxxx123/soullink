@@ -1,0 +1,11 @@
+!/bin/bash
+/root/.acme.sh/acme.sh --install-cert -d @YUMING@ --ecc --fullchain-file @fcMuLu@ --key-file @KeyMuLu@    
+echo "Xray Certificates Renewed"
+
+chmod +r @KeyMuLu@ 
+echo "Read Permission Granted for Private Key"
+		
+echo "=====pkill -9 xray:"
+pkill -9 xray
+
+echo "Xray Restart"

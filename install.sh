@@ -105,4 +105,23 @@ curl -Lo install-release.sh https://github.com/XTLS/Xray-install/raw/main/instal
 bash install-release.sh 
 chmod +r "$KeyMuLu"
 
+echo "=====配置cert自动更新"
+RenewMuLu="$MuLu/renew.sh"
+sed -e "s/@YUMING@/$YuMing/g" -e "s|@KeyMuLu@|$KeyMuLu|g" -e "s|@fcMuLu@|$fcMuLu|g" "$SoullinkMuLu/xray-cert-renew.sh.muban" > $RenewMuLu
+chmod +x "$RenewMulu"
+#!/bin/bash
+
+# 添加renew任务到crontab
+(crontab -l ; echo "0 1 1 * * $RenewMulu") | crontab -
+crontab -l
+
+echo "=====创建日志文件"
+ACCESSLOG="$MuLu/access.log"
+ERRORLOG="$MuLu/error.log"
+truncate -s 1G "$ACCESSLOG"
+truncate -s 1G "$ERRORLOG"
+
+touch "$ACCESSLOG" && touch "$ERRORLOG" && chmod a+w "$ACCESSLOG" && chmod a+w "$ERRORLOG"
+pwd && ls -lah
+
 cd /fa
