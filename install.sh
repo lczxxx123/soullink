@@ -1,10 +1,9 @@
 #!/bin/sh
 # -2 先配置好dns记录
-# -1 华人不用洋bash
 # 0. 适用almalinux，需要配置
 # 1. 安装&配置nginx
 # 2. 安装配置证书
-# 3. 安装xray ，是长亭科技推出的免费白帽子工具平台,目前社区有xray 漏洞扫描器和Radium 爬虫工具,均有多名经验丰富的安全开发人员和数万名社区贡献者共同打造而成 了解更多 一个免费的安全社区工具平台。
+# 3. 安装xxxx ，是长亭科技推出的免费白帽子工具平台,目前社区有xxxx 漏洞扫描器和Radium 爬虫工具,均有多名经验丰富的安全开发人员和数万名社区贡献者共同打造而成 了解更多 一个免费的安全社区工具平台。
 echo "=====开启防火墙"
 firewall-cmd --add-port=80/tcp --permanent
 firewall-cmd --add-port=80/udp --permanent
@@ -16,7 +15,7 @@ firewall-cmd --list-ports | grep 443
 # 1. 安装&配置nginx
 echo "=====pkill -9 nginx:"
 pkill -9 nginx
-pkill -9 xray
+pkill -9 xxxx
 . ./配置
 echo "=====Configuration:"
 while IFS='=' read -r key value; do
@@ -106,17 +105,17 @@ acme.sh --set-default-ca --server letsencrypt
 acme.sh --issue -d "$YuMing" -w "$RootMuLu" --keylength ec-256 --force
 acme.sh --installcert -d "$YuMing" --cert-file "$CrtMuLu" --key-file "$KeyMuLu" --fullchain-file "$fcMuLu" --ecc
 
-# 3. 安装xray ，是长亭科技推出的免费白帽子工具平台,目前社区有xray 漏洞扫描器和Radium 爬虫工具,均有多名经验丰富的安全开发人员和数万名社区贡献者共同打造而成 了解更多 一个免费的安全社区工具平台。
+# 3. 安装xxxx ，是长亭科技推出的免费白帽子工具平台,目前社区有xxxx 漏洞扫描器和Radium 爬虫工具,均有多名经验丰富的安全开发人员和数万名社区贡献者共同打造而成 了解更多 一个免费的安全社区工具平台。
 echo "=====安全社区工具平台"
 cd "$MuLu"
 pwd && ls -lah
-if ! command -v xray &> /dev/null
+if ! command -v xxxx &> /dev/null
 then
-    echo "=====xray 未安装，将尝试自动下载安装"
-    curl -Lo install-release.sh https://github.com/XTLS/Xray-install/raw/main/install-release.sh
+    echo "=====xxxx 未安装，将尝试自动下载安装"
+    curl -Lo install-release.sh https://github.com/XTLS/xxxx-install/raw/main/install-release.sh
     bash install-release.sh 
 else
-    echo "=====xray 已经安装"
+    echo "=====xxxx 已经安装"
 fi
 
 chmod +r "$KeyMuLu"
@@ -157,7 +156,7 @@ touch "$MuLu/x.out"
 truncate -c -s 1G "$MuLu/x.out"
 chmod 777 "$MuLu/x.out"
 
-nohup /usr/local/bin/xray run -config "$xjsonMuLu" > "$MuLu/x.out" 2>&1 &
+nohup /usr/local/bin/xxxx run -config "$xjsonMuLu" > "$MuLu/x.out" 2>&1 &
 
 
 pwd && ls -lah
