@@ -9,6 +9,8 @@ echo "=====开启防火墙"
 firewall-cmd --add-port=80/tcp --permanent
 firewall-cmd --add-port=443/tcp --permanent
 firewall-cmd --reload
+firewall-cmd --list-ports | grep 80/tcp
+firewall-cmd --list-ports | grep 443/tcp
 # 1. 安装&配置nginx
 echo "=====pkill -9 nginx:"
 pkill -9 nginx
