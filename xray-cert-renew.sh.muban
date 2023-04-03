@@ -8,4 +8,5 @@ echo "Read Permission Granted for Private Key"
 echo "=====pkill -9 xray:"
 pkill -9 xray
 
+nohup /usr/local/bin/xray run -config "@xjsonMuLu@" > "@MuLu@/x.out" 2>&1 &
 echo "Xray Restart"

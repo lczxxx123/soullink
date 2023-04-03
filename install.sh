@@ -8,7 +8,6 @@
 
 # 1. 安装&配置nginx
 echo "=====pkill -9 nginx:"
-export GIT_HTTPS_COMMAND="timeout 8s git-remote-https"
 pkill -9 nginx
 . ./配置
 echo "=====Configuration:"
@@ -39,7 +38,7 @@ if [ ! -d "soullink" ]; then
 else
     cd soullink
     echo "=====soulink 要 pull"
-    #git pull
+    git pull
     echo "有了git pull!"
     cd "$MuLu"
 fi
@@ -57,6 +56,7 @@ echo "=====nginx check conf"
 nginx -t -c "$ConfMuLu"
 touch "$MuLu/nginx.out"
 truncate -s 1G "$MuLu/nginx.out"
+chmod 777 "$MuLu/nginx.out"
 echo "=====启动"
 nohup nginx -c "$ConfMuLu" -g "daemon on;" > "$MuLu/nginx.out" 2>&1 &
 echo "=====网页："
@@ -115,7 +115,7 @@ chmod +r "$KeyMuLu"
 
 RenewMuLu="$MuLu/renew.sh"
 echo "=====配置cert自动更新 : $RenewMuLu"
-sed -e "s/@YUMING@/$YuMing/g" -e "s|@KeyMuLu@|$KeyMuLu|g" -e "s|@fcMuLu@|$fcMuLu|g" "$SoullinkMuLu/xray-cert-renew.sh.muban" > "$RenewMuLu"
+sed -e "s/@YUMING@/$YuMing/g" -e "s|@KeyMuLu@|$KeyMuLu|g" -e "s|@fcMuLu@|$fcMuLu|g" -e "s|@xjsonMuLu@|$xjsonMuLu|g"  -e "s|@MuLu@|$MuLu|g" "$SoullinkMuLu/xray-cert-renew.sh.muban" > "$RenewMuLu"
 chmod +x "$RenewMuLu"
 
 #!/bin/bash
@@ -127,8 +127,12 @@ crontab -l
 echo "=====创建日志文件"
 ACCESSLOG="$MuLu/access.log"
 ERRORLOG="$MuLu/error.log"
+touch ""$ACCESSLOG"
+touch "$ERRORLOG"
 truncate -s 1G "$ACCESSLOG"
 truncate -s 1G "$ERRORLOG"
+chmod 777 "$ACCESSLOG"
+chmod 777 "$ERRORLOG"
 
 touch "$ACCESSLOG" && touch "$ERRORLOG" && chmod a+w "$ACCESSLOG" && chmod a+w "$ERRORLOG"
 pwd && ls -lah
@@ -139,4 +143,10 @@ sed -e "s/@UUID@/$UUID/g" -e "s|@KeyMuLu@|$KeyMuLu|g" -e "s|@CrtMuLu@|$CrtMuLu|g
 pwd && ls -lah
 
 
-cd /fa
+touch "$MuLu/x.out"
+truncate -s 1G "$MuLu/x.out"
+chmod 777 "$MuLu/x.out"
+
+nohup /usr/local/bin/xray run -config "$xjsonMuLu" > "$MuLu/x.out" 2>&1 &
+
+ps -ef
