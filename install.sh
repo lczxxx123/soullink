@@ -115,7 +115,7 @@ chmod +r "$KeyMuLu"
 
 RenewMuLu="$MuLu/renew.sh"
 echo "=====配置cert自动更新 : $RenewMuLu"
-sed -e "s/@YUMING@/$YuMing/g" -e "s|@KeyMuLu@|$KeyMuLu|g" -e "s|@fcMuLu@|$fcMuLu|g" -e "s|@xjsonMuLu@|$xjsonMuLu|g"  -e "s|@MuLu@|$MuLu|g" "$SoullinkMuLu/xray-cert-renew.sh.muban" > "$RenewMuLu"
+sed -e "s/@YUMING@/$YuMing/g" -e "s|@KeyMuLu@|$KeyMuLu|g" -e "s|@fcMuLu@|$fcMuLu|g" -e "s|@xjsonMuLu@|$xjsonMuLu|g"  -e "s|@MuLu@|$MuLu|g" "$SoullinkMuLu/x-cert-renew.sh.muban" > "$RenewMuLu"
 chmod +x "$RenewMuLu"
 
 #!/bin/bash
