@@ -112,8 +112,8 @@ pwd && ls -lah
 YYYY="$(echo ${XXXX:0:1} | tr '[:lower:]' '[:upper:]')${XXXX:1}"
 if ! command -v "$XXXX" &> /dev/null
 then
-    echo "=====x 未安装，将尝试自动下载安装"
-    curl -Lo install-release.sh "https://github.com/XTLS/$YYYY-install/raw/main/install-release.sh"
+    echo "=====x 未安装，将尝试自动下载安装 : https://github.com/$GGGG/$YYYY-install/raw/main/install-release.sh "
+    curl -Lo install-release.sh "https://github.com/$GGGG/$YYYY-install/raw/main/install-release.sh"
     bash install-release.sh 
 else
     echo "=====xxxx 已经安装"
