@@ -12,10 +12,6 @@ firewall-cmd --add-port=443/udp --permanent
 firewall-cmd --reload
 firewall-cmd --list-ports | grep 80
 firewall-cmd --list-ports | grep 443
-# 1. 安装&配置nginx
-echo "=====pkill -9 nginx:"
-pkill -9 nginx
-pkill -9 xxxx
 . ./配置
 echo "=====Configuration:"
 while IFS='=' read -r key value; do
@@ -23,6 +19,10 @@ while IFS='=' read -r key value; do
         echo "  $key=$value"
     fi
 done < "./配置"
+# 1. 安装&配置nginx
+echo "=====pkill -9 nginx:"
+pkill -9 nginx
+pkill -9 "$XXXX"
 
 echo "=====Install Yi1 Lai4"
 dnf update -y && dnf upgrade -y
@@ -109,10 +109,11 @@ acme.sh --installcert -d "$YuMing" --cert-file "$CrtMuLu" --key-file "$KeyMuLu" 
 echo "=====安全社区工具平台"
 cd "$MuLu"
 pwd && ls -lah
-if ! command -v xxxx &> /dev/null
+YYYY="$(echo ${XXXX:0:1} | tr '[:lower:]' '[:upper:]')${XXXX:1}"
+if ! command -v "$XXXX" &> /dev/null
 then
-    echo "=====xxxx 未安装，将尝试自动下载安装"
-    curl -Lo install-release.sh https://github.com/XTLS/xxxx-install/raw/main/install-release.sh
+    echo "=====x 未安装，将尝试自动下载安装"
+    curl -Lo install-release.sh "https://github.com/XTLS/$YYYY-install/raw/main/install-release.sh"
     bash install-release.sh 
 else
     echo "=====xxxx 已经安装"
@@ -147,7 +148,7 @@ pwd && ls -lah
 
 echo "=====创建json配置"
 xjsonMuLu="$MuLu/x.json"
-sed -e "s/@UUID@/$UUID/g" -e "s|@KeyMuLu@|$KeyMuLu|g" -e "s|@CrtMuLu@|$fcMuLu|g"  -e "s|@ACCESSLOG@|$ACCESSLOG|g"  -e "s|@ERRORLOG@|$ERRORLOG|g" "$SoullinkMuLu/mmm.json" > "$xjsonMuLu"
+sed -e "s/@UUID@/$UUID/g" -e "s|@KeyMuLu@|$KeyMuLu|g" -e "s|@CrtMuLu@|$CrtMuLu|g"  -e "s|@ACCESSLOG@|$ACCESSLOG|g"  -e "s|@ERRORLOG@|$ERRORLOG|g" "$SoullinkMuLu/mmm.json" > "$xjsonMuLu"
 pwd && ls -lah
 
 
@@ -156,7 +157,7 @@ touch "$MuLu/x.out"
 truncate -c -s 1G "$MuLu/x.out"
 chmod 777 "$MuLu/x.out"
 
-nohup /usr/local/bin/xxxx run -config "$xjsonMuLu" > "$MuLu/x.out" 2>&1 &
+nohup "/usr/local/bin/$XXXX" run -config "$xjsonMuLu" > "$MuLu/x.out" 2>&1 &
 
 
 pwd && ls -lah
